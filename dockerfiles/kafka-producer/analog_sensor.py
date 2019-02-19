@@ -4,11 +4,12 @@ import spidev
 
 def spi_init():
     adc_channel = 2
-    spi = spidev.Spidev()
+    spi = spidev.SpiDev()
     spi.open(0,0)
     spi.max_speed_hz = 20000
+    return adc_channel, spi
 
-def readadc(adc_channel):
+def readadc(spi,adc_channel):
     if adc_channel > 7 or adc_channel < 0:
         return -1
     adc_reading = spi.xfer2([1, 8 + adc_channel << 4, 0])
@@ -17,7 +18,7 @@ def readadc(adc_channel):
     return adc_output
 
 def analog_sensor():
-    spi_init()
+    adc_channel, spi = spi_init()
     while True:
-        value = readadc(adc_channel)
+        value = readadc(spi,adc_channel)
         return value
