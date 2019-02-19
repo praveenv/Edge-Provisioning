@@ -4,6 +4,7 @@ from analog_sensor import sensor_reading
 from anomaly_detection import check_anomaly
 
 
+
 def initialize():
     producer = KafkaProducer(bootstrap_servers=['128.195.53.171:9092'])
 
