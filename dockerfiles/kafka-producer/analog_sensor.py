@@ -17,7 +17,7 @@ def readadc(spi,adc_channel):
     print(adc_output)
     return adc_output
 
-def analog_sensor():
+def sensor_reading():
     adc_channel, spi = spi_init()
     while True:
         value = readadc(spi,adc_channel)
