@@ -3,11 +3,10 @@
 import spidev
 
 def spi_init():
-    adc_channel = 2
     spi = spidev.SpiDev()
     spi.open(0,0)
     spi.max_speed_hz = 20000
-    return adc_channel, spi
+    return spi
 
 def readadc(spi,adc_channel):
     if adc_channel > 7 or adc_channel < 0:
@@ -18,7 +17,8 @@ def readadc(spi,adc_channel):
     return adc_output
 
 def sensor_reading():
-    adc_channel, spi = spi_init()
+    adc_channel = 2
+    spi = spi_init()
     while True:
         value = readadc(spi,adc_channel)
         return value
